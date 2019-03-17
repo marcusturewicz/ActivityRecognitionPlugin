@@ -7,7 +7,14 @@ namespace Plugin.ActivityRecognition
         Stationary,
         Walking,
         Running,
-        InVehicle,
         Cycling,
+        InVehicle        
+    }
+        
+    public enum Confidence
+    {
+        Low,
+        Medium,
+        High
     }
 }

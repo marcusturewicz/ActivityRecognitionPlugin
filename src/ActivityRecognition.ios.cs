@@ -7,19 +7,15 @@ using System.Threading.Tasks;
 
 namespace Plugin.ActivityRecognition
 {
-    public static partial class Vibration
+    public static partial class ActivityRecognition
     {
         private internal static bool IsSupported => true;
 
-        private CMMotionActivityManager _manager = new CMMotionActivityManager();
-        private IDictionary<ActivityType, Confidence> _currentActivities;
+        private CMMotionActivityManager _manager;
 
-        public event ActivityEventHandler ActivityEvent;
-
-        // Invoke the Changed event; called whenever list changes
-        private void OnChanged(ActivityEventArgs e)
+        public ActivityRecognition()
         {
-            ActivityEvent?.Invoke(this, e);
+            _manager = new CMMotionActivityManager();
         }
 
         private void OnCMMotionActivity(CMMotionActivity activity)
