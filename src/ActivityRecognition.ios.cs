@@ -9,23 +9,28 @@ namespace Plugin.ActivityRecognition
 {
     public static partial class ActivityRecognition
     {
-        private internal static bool IsSupported => true;
+        internal static bool IsSupported => true;
 
-        private CMMotionActivityManager _manager;
+        static CMMotionActivityManager _manager = new CMMotionActivityManager();
 
-        public ActivityRecognition()
-        {
-            _manager = new CMMotionActivityManager();
-        }
-
-        private void OnCMMotionActivity(CMMotionActivity activity)
+        static void OnCMMotionActivity(CMMotionActivity activity)
         {
             // Convert CMMotionActivity to cross type
             var activityTypes = GetActivities(activity);
-            OnChanged(new ActivityEventArgs(activityTypes, activity.StartDate.ToDateTime()));
+            OnChanged(_manager, new ActivityEventArgs(activityTypes));
         }
 
-        private IDictionary<ActivityType, Confidence> GetActivities(CMMotionActivity activity)
+        static void Start()
+        {
+            _manager.StartActivityUpdates(new NSOperationQueue(), OnCMMotionActivity);
+        }
+
+        static void Stop()
+        {
+            _manager.StopActivityUpdates();
+        }
+
+        static IDictionary<ActivityType, Confidence> GetActivities(CMMotionActivity activity)
         {
             var activities = new Dictionary<ActivityType, Confidence>();
             var confidence = GetConfidence(activity.Confidence);
@@ -51,23 +56,13 @@ namespace Plugin.ActivityRecognition
             return activities;
         }
 
-        private Confidence GetConfidence(CMMotionActivityConfidence confidence)
+        static Confidence GetConfidence(CMMotionActivityConfidence confidence)
         {
             if (confidence == CMMotionActivityConfidence.Low)
                 return Confidence.Low;
             if (confidence == CMMotionActivityConfidence.Medium)
                 return Confidence.Medium;
             return Confidence.High;
-        }
-
-        public static void Start()
-        {
-            _manager.StartActivityUpdates(new NSOperationQueue(), OnCMMotionActivity);
-        }
-
-        public static void Stop() 
-        {
-            _manager.StopActivityUpdates();
         }
     }
 }

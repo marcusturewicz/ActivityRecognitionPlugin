@@ -7,21 +7,19 @@ namespace Plugin.ActivityRecognition
     {
         static event EventHandler<ActivityEventArgs> ActivityChanedInternal;
 
-        static void OnChanged(ActivityEventArgs e)
+        static void OnChanged(object sender, ActivityEventArgs e)
         {
-            ActivityChanedInternal?.Invoke(this, e);
+            ActivityChanedInternal?.Invoke(sender, e);
         }
     }
 
     public class ActivityEventArgs : EventArgs
     {
         public IDictionary<ActivityType, Confidence> Activities;
-        public DateTime StartDate { get;  }
 
-        public ActivityEventArgs(IDictionary<ActivityType, Confidence> activities, DateTime date)
+        public ActivityEventArgs(IDictionary<ActivityType, Confidence> activities)
         {
             Activities = activities;
-            StartDate = date;
         }
     }
 }

@@ -13,4 +13,9 @@ namespace Plugin.ActivityRecognition
         static void Stop()
             => throw new NotImplementedInReferenceAssemblyException();
     }
+
+    public class NotImplementedInReferenceAssemblyException : Exception
+    {
+        
+    }
 }
