@@ -5,11 +5,27 @@ namespace Plugin.ActivityRecognition
 {
     public static partial class ActivityRecognition
     {
-        static event EventHandler<ActivityEventArgs> ActivityChanedInternal;
+        public static void Start()
+        {
+            if (!IsSupported)
+                throw new NotImplementedException();
+
+            PlatformStart();
+        }
+
+        public static void Stop()
+        {
+            if (!IsSupported)
+                throw new NotImplementedException();
+
+            PlatformStop();
+        }
+
+        public static event EventHandler<ActivityEventArgs> ActivityChaned;
 
         static void OnChanged(object sender, ActivityEventArgs e)
         {
-            ActivityChanedInternal?.Invoke(sender, e);
+            ActivityChaned?.Invoke(sender, e);
         }
     }
 

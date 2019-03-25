@@ -5,17 +5,12 @@ namespace Plugin.ActivityRecognition
     public static partial class ActivityRecognition
     {
         internal static bool IsSupported
-            => throw new NotImplementedInReferenceAssemblyException();
+            => throw new NotImplementedException();
 
-        static void Start()
-            => throw new NotImplementedInReferenceAssemblyException();
+        static void PlatformStart()
+            => throw new NotImplementedException();
 
-        static void Stop()
-            => throw new NotImplementedInReferenceAssemblyException();
-    }
-
-    public class NotImplementedInReferenceAssemblyException : Exception
-    {
-        
+        static void PlatformStop()
+            => throw new NotImplementedException();
     }
 }

@@ -2,13 +2,12 @@ using System;
 using Foundation;
 using CoreMotion;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Plugin.ActivityRecognition
 {
     public static partial class ActivityRecognition
     {
+        // TODO: check if actually supported
         internal static bool IsSupported => true;
 
         static CMMotionActivityManager _manager = new CMMotionActivityManager();
@@ -20,12 +19,12 @@ namespace Plugin.ActivityRecognition
             OnChanged(_manager, new ActivityEventArgs(activityTypes));
         }
 
-        static void Start()
+        static void PlatformStart()
         {
             _manager.StartActivityUpdates(new NSOperationQueue(), OnCMMotionActivity);
         }
 
-        static void Stop()
+        static void PlatformStop()
         {
             _manager.StopActivityUpdates();
         }
