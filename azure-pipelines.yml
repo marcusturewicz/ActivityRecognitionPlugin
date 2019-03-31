@@ -1,0 +1,30 @@
+jobs:
+  - job: build_windows
+    displayName: Build Windows Library
+    pool:
+      vmImage: vs2017-win2016
+    steps:
+      # restore, build and pack the packages
+      - task: MSBuild@1
+        displayName: Build Solution
+        inputs:
+          solution: '**/*.csproj'
+          configuration: Release
+          msbuildArguments: '/restore /t:Build /p:ContinuousIntegrationBuild=true /p:Deterministic=false'
+      - task: MSBuild@1
+        displayName: Pack NuGets
+        inputs:
+          solution: '**/*.csproj'
+          configuration: Release
+          msbuildArguments: '/t:Pack /p:PackageVersion=$(NugetPackageVersion) /p:PackageOutputPath="$(Build.ArtifactStagingDirectory)/nuget"'
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: test
+          projects: '**/*Test.csproj'
+          arguments: '--configuration Release'
+      # publish the packages
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Unsigned NuGets'
+        inputs:
+          artifactName: nuget
+          pathToPublish: '$(Build.ArtifactStagingDirectory)/nuget'
