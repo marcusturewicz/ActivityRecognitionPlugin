@@ -4,8 +4,8 @@
     <TargetFrameworks></TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard1.0;netstandard2.0;Xamarin.iOS10;MonoAndroid71;MonoAndroid80;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard1.0;netstandard2.0;Xamarin.iOS10;MonoAndroid71;MonoAndroid80;MonoAndroid81;</TargetFrameworks>
-    <AssemblyName></AssemblyName>
-    <RootNamespace></RootNamespace>
+    <AssemblyName>Plugin.ActivityRecognition</AssemblyName>
+    <RootNamespace>Plugin.ActivityRecognition</RootNamespace>
     <PackageId>Plugin.ActivityRecognition</PackageId>
     <PackageIconUrl></PackageIconUrl>
     <Summary>Activity Recognition Plugin for Xamarin and Windows</Summary>
