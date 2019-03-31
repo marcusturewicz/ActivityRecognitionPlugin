@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Plugin.ActivityRecognition
+namespace ActivityRecognitionPlugin
 {
     public static partial class ActivityRecognition
     {

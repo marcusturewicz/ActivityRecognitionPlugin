@@ -1,6 +1,6 @@
 using System;
 
-namespace Plugin.ActivityRecognition
+namespace ActivityRecognitionPlugin
 {
     public static partial class ActivityRecognition
     {

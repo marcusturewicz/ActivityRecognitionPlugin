@@ -1,5 +1,5 @@
 
-namespace Plugin.ActivityRecognition
+namespace ActivityRecognitionPlugin
 {
     public enum ActivityType
     {
